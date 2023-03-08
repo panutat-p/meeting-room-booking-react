@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-const LoginPage = () => {
+function LoginPage() {
   return (
     <Flex
       minH={'100vh'}
@@ -67,6 +67,6 @@ const LoginPage = () => {
       </Stack>
     </Flex>
   );
-};
+}
 
 export default LoginPage;
