@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   IconButton,
   Avatar,
@@ -30,7 +31,6 @@ import {
   FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
-import { NavLink, Outlet } from 'react-router-dom';
 
 interface LinkItemProps {
   name: string;
@@ -77,6 +77,8 @@ interface SidebarProps extends BoxProps {
 }
 
 function SidebarContent({ onClose, ...rest }: SidebarProps) {
+  const location = useLocation();
+
   return (
     <Box
       transition="3s ease"
@@ -95,7 +97,12 @@ function SidebarContent({ onClose, ...rest }: SidebarProps) {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href}>
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          href={link.href}
+          activeColor={location.pathname === link.href ? 'cyan.400' : ''}
+        >
           {link.name}
         </NavItem>
       ))}
@@ -107,8 +114,9 @@ interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactNode;
   href: string;
+  activeColor?: string;
 }
-function NavItem({ icon, children, href, ...rest }: NavItemProps) {
+function NavItem({ icon, children, href, activeColor, ...rest }: NavItemProps) {
   return (
     <Link
       as={NavLink}
@@ -117,6 +125,7 @@ function NavItem({ icon, children, href, ...rest }: NavItemProps) {
       _focus={{ boxShadow: 'none' }}
     >
       <Flex
+        bg={activeColor}
         align="center"
         p="4"
         mx="4"
