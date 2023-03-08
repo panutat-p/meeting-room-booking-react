@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   Flex,
   Box,
@@ -24,14 +24,13 @@ function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormInput>();
 
-  function onSubmit(data: LoginFormInput): void {
+  function onSubmit(data: LoginFormInput) {
     console.log('data', data);
   }
 
   return (
-    // @ts-ignore
     <form onSubmit={handleSubmit(onSubmit)} noValidate={true}>
       <Flex
         minH={'100vh'}
