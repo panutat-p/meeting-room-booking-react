@@ -1,4 +1,6 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import {
   Flex,
   Box,
@@ -12,6 +14,7 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 
 type LoginFormInput = {
@@ -20,11 +23,19 @@ type LoginFormInput = {
 };
 
 function LoginPage() {
+  const schema = yup.object().shape({
+    email: yup.string().required('Email is required').email('Invalid Email'),
+    password: yup
+      .string()
+      .required('password is required')
+      .min(3, 'password is too short'),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormInput>();
+  } = useForm<LoginFormInput>({ resolver: yupResolver(schema), mode: 'all' });
 
   function onSubmit(data: LoginFormInput) {
     console.log('data', data);
@@ -53,13 +64,22 @@ function LoginPage() {
             p={8}
           >
             <Stack spacing={4}>
-              <FormControl id="email">
+              <FormControl id="email" isInvalid={errors.email ? true : false}>
                 <FormLabel>Email address</FormLabel>
                 <Input type="email" {...register('email')} />
+                <FormErrorMessage>
+                  {errors.email && errors.email?.message}
+                </FormErrorMessage>
               </FormControl>
-              <FormControl id="password">
+              <FormControl
+                id="password"
+                isInvalid={errors.password ? true : false}
+              >
                 <FormLabel>Password</FormLabel>
                 <Input type="password" {...register('password')} />
+                <FormErrorMessage>
+                  {errors.password && errors.password?.message}
+                </FormErrorMessage>
               </FormControl>
               <Stack spacing={10}>
                 <Stack
