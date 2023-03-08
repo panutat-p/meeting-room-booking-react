@@ -25,26 +25,21 @@ import {
 import {
   FiHome,
   FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome, href: '/' },
+  { name: 'MeetingRoom', icon: FiTrendingUp, href: '/room' },
 ];
 
 export default function DashboardLayout() {
@@ -100,7 +95,7 @@ function SidebarContent({ onClose, ...rest }: SidebarProps) {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} href={link.href}>
           {link.name}
         </NavItem>
       ))}
@@ -111,11 +106,13 @@ function SidebarContent({ onClose, ...rest }: SidebarProps) {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactNode;
+  href: string;
 }
-function NavItem({ icon, children, ...rest }: NavItemProps) {
+function NavItem({ icon, children, href, ...rest }: NavItemProps) {
   return (
     <Link
-      href="#"
+      as={NavLink}
+      to={href}
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}
     >
