@@ -8,11 +8,14 @@ https://chakra-ui.com/getting-started
 
 https://react-icons.github.io/react-icons
 
+https://react-hook-form.com/get-started
+
 ```shell
 npm i  -D prettier
 npm i react-router-dom
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 npm i react-icons
+npm i react-hook-form
 ```
 
 ## Template
