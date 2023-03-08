@@ -7,7 +7,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
   Link,
   Button,
@@ -22,6 +21,8 @@ type LoginFormInput = {
   password: string;
 };
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 function LoginPage() {
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid Email'),
@@ -34,10 +35,11 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting, errors },
   } = useForm<LoginFormInput>({ resolver: yupResolver(schema), mode: 'all' });
 
-  function onSubmit(data: LoginFormInput) {
+  async function onSubmit(data: LoginFormInput) {
+    await sleep(2000);
     console.log('data', data);
   }
 
@@ -86,11 +88,10 @@ function LoginPage() {
                   direction={{ base: 'column', sm: 'row' }}
                   align={'start'}
                   justify={'space-between'}
-                >
-                  <Checkbox>Remember me</Checkbox>
-                  <Link color={'blue.400'}>Forgot password?</Link>
-                </Stack>
+                ></Stack>
                 <Button
+                  isLoading={isSubmitting}
+                  loadingText={'logging in'}
                   type="submit"
                   bg={'blue.400'}
                   color={'white'}
