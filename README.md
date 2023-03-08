@@ -10,12 +10,16 @@ https://react-icons.github.io/react-icons
 
 https://react-hook-form.com/get-started
 
+https://react-hook-form.com/get-started#SchemaValidation
+
 ```shell
 npm i  -D prettier
 npm i react-router-dom
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 npm i react-icons
 npm i react-hook-form
+npm i @hookform/resolvers
+npm i yup
 ```
 
 ## Template
