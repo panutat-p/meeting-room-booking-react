@@ -14,6 +14,7 @@ import {
   Text,
   useColorModeValue,
   FormErrorMessage,
+  useToast,
 } from '@chakra-ui/react';
 
 type LoginFormInput = {
@@ -24,6 +25,8 @@ type LoginFormInput = {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function LoginPage() {
+  const toast = useToast();
+
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid Email'),
     password: yup
@@ -39,8 +42,16 @@ function LoginPage() {
   } = useForm<LoginFormInput>({ resolver: yupResolver(schema), mode: 'all' });
 
   async function onSubmit(data: LoginFormInput) {
-    await sleep(2000);
+    await sleep(1000);
     console.log('data', data);
+    toast({
+      title: 'Form is submitted',
+      description: data.email,
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right',
+    });
   }
 
   return (
