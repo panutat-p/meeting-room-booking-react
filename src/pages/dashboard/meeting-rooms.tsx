@@ -1,15 +1,28 @@
 import React from 'react';
-import { useAppSelector } from '../../redux/hooks';
-import { selectAuthState } from '../../redux/auth-slice';
+import { Heading } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
+
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectAuthState, updateProfileAction } from '../../redux/auth-slice';
 
 function MeetingRooms() {
-  const authState = useAppSelector(selectAuthState);
+  const { profile, email } = useAppSelector(selectAuthState);
+  const dispatch = useAppDispatch();
+
+  function reserveRoom(): void {
+    dispatch(updateProfileAction());
+  }
 
   return (
     <>
-      <h1>Meeting Rooms</h1>
+      <Heading>Meeting Room</Heading>
       <br />
-      <p>{authState.profile}</p>
+      <p>{profile}</p>
+      <p>{email}</p>
+      <br />
+      <Button colorScheme="teal" size="md" onClick={reserveRoom}>
+        Transfer to 🐔
+      </Button>
     </>
   );
 }

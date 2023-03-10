@@ -1,15 +1,18 @@
 import React from 'react';
+import { Heading } from '@chakra-ui/react';
+
 import { useAppSelector } from '../../redux/hooks';
 import { selectAuthState } from '../../redux/auth-slice';
 
 function HomePage() {
-  const authState = useAppSelector(selectAuthState);
+  const { profile, email } = useAppSelector(selectAuthState);
 
   return (
     <>
-      <h1>Home</h1>
+      <Heading>Home</Heading>
       <br />
-      <p>{authState.profile}</p>
+      <p>{profile}</p>
+      <p>{email}</p>
     </>
   );
 }
