@@ -12,6 +12,8 @@ https://react-hook-form.com/get-started
 
 https://react-hook-form.com/get-started#SchemaValidation
 
+https://redux-toolkit.js.org/tutorials/quick-start
+
 ```shell
 npm i  -D prettier
 npm i react-router-dom
@@ -20,6 +22,7 @@ npm i react-icons
 npm i react-hook-form
 npm i @hookform/resolvers
 npm i yup
+npm i  @reduxjs/toolkit react-redux
 ```
 
 ## Template
