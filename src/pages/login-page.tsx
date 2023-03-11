@@ -18,11 +18,16 @@ import {
 } from '@chakra-ui/react';
 
 import { LogInFormInput } from '../types/form';
+import { useAppDispatch } from '../redux/hooks';
+import { loginThunk } from '../redux/auth-slice';
+import { AxiosError } from 'axios';
+import { LogInErrorPayload } from '../types/login-payload';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function LogInPage() {
   const toast = useToast();
+  const dispatch = useAppDispatch();
 
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid Email'),
@@ -36,16 +41,26 @@ function LogInPage() {
   } = useForm<LogInFormInput>({ resolver: yupResolver(schema), mode: 'all' });
 
   async function onSubmit(data: LogInFormInput) {
-    await sleep(1000);
-    console.log('data', data);
-    toast({
-      title: 'Form is submitted',
-      description: data.email,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-      position: 'top-right',
-    });
+    try {
+      const res = await dispatch(loginThunk(data)).unwrap();
+      toast({
+        title: 'Form is submitted',
+        description: JSON.stringify(res),
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    } catch (e: any | AxiosError<LogInErrorPayload>) {
+      toast({
+        title: 'Form is submitted',
+        description: JSON.stringify(e),
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
   }
 
   return (
