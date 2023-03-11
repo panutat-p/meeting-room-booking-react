@@ -21,7 +21,7 @@ import { LogInFormInput } from '../types/form';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-function LoginPage() {
+function LogInPage() {
   const toast = useToast();
 
   const schema = yup.object().shape({
@@ -118,4 +118,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default LogInPage;
