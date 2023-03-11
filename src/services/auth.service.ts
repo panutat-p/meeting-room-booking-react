@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.codingthailand.com/api';
 
 export async function login(email: string, password: string): Promise<AxiosResponse<LogInPayload>> {
   const config: AxiosRequestConfig = {
-    method: 'GET',
+    method: 'POST',
     url: BASE_URL + '/login',
     headers: {
       'Content-Type': 'application/json',
