@@ -17,10 +17,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-type LoginFormInput = {
-  email: string;
-  password: string;
-};
+import { LogInFormInput } from '../types/form';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -39,9 +36,9 @@ function LoginPage() {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm<LoginFormInput>({ resolver: yupResolver(schema), mode: 'all' });
+  } = useForm<LogInFormInput>({ resolver: yupResolver(schema), mode: 'all' });
 
-  async function onSubmit(data: LoginFormInput) {
+  async function onSubmit(data: LogInFormInput) {
     await sleep(1000);
     console.log('data', data);
     toast({

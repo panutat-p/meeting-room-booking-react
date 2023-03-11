@@ -1,0 +1,23 @@
+POST https://api.codingthailand.com/api/register
+Content-Type: application/json
+
+{"name": "🐵","email": "monkey1@gmail.com","password": "qqww"}
+
+###
+
+POST https://api.codingthailand.com/api/login
+Content-Type: application/json
+
+{"email": "monkey1@gmail.com","password": "qqwww"}
+
+###
+
+GET https://api.codingthailand.com/api/events
+
+###
+
+POST https://api.codingthailand.com/api/logout
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLmNvZGluZ3RoYWlsYW5kLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTY3ODU0NDI2MSwiZXhwIjoxNjc4OTc2MjYxLCJuYmYiOjE2Nzg1NDQyNjEsImp0aSI6IkVHNVl0OVVOcjYzc3ViV3ciLCJzdWIiOjM5ODMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEiLCJ1c2VyIjp7ImlkIjozOTgzLCJyb2xlIjoibWVtYmVyIn19.xcJFkq7gkchOMSfRelUypPDbvPMnnXDig0Repgyh4lA
+
+###

@@ -1,0 +1,17 @@
+# List all rooms
+GET https://api.codingthailand.com/api/events
+
+###
+
+# Insert a new room
+POST https://api.codingthailand.com/api/events
+Content-Type: application/json
+
+{
+  "title": "ห้อง 1111",
+  "start": "2023-02-04 13:00:00",
+  "end": "2023-02-05 14:00:00",
+  "created_by": "John Doe"
+}
+
+###
