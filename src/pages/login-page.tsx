@@ -26,10 +26,7 @@ function LogInPage() {
 
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid Email'),
-    password: yup
-      .string()
-      .required('password is required')
-      .min(3, 'password is too short'),
+    password: yup.string().required('password is required').min(3, 'password is too short'),
   });
 
   const {
@@ -53,50 +50,28 @@ function LogInPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate={true}>
-      <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}
-      >
+      <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'4xl'}>Log in to your account</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
-              to enjoy all of our cool <Link color={'blue.400'}>features</Link>{' '}
-              ✌️
+              to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
             </Text>
           </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}
-          >
+          <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
             <Stack spacing={4}>
               <FormControl id="email" isInvalid={errors.email ? true : false}>
                 <FormLabel>Email address</FormLabel>
                 <Input type="email" {...register('email')} />
-                <FormErrorMessage>
-                  {errors.email && errors.email?.message}
-                </FormErrorMessage>
+                <FormErrorMessage>{errors.email && errors.email?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl
-                id="password"
-                isInvalid={errors.password ? true : false}
-              >
+              <FormControl id="password" isInvalid={errors.password ? true : false}>
                 <FormLabel>Password</FormLabel>
                 <Input type="password" {...register('password')} />
-                <FormErrorMessage>
-                  {errors.password && errors.password?.message}
-                </FormErrorMessage>
+                <FormErrorMessage>{errors.password && errors.password?.message}</FormErrorMessage>
               </FormControl>
               <Stack spacing={10}>
-                <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}
-                ></Stack>
+                <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}></Stack>
                 <Button
                   isLoading={isSubmitting}
                   loadingText={'logging in'}

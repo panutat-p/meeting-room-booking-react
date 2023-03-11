@@ -4,10 +4,7 @@ import { LogInPayload } from '../types/login-payload';
 
 const BASE_URL = 'https://api.codingthailand.com/api';
 
-export async function login(
-  email: string,
-  password: string
-): Promise<AxiosResponse<LogInPayload>> {
+export async function login(email: string, password: string): Promise<AxiosResponse<LogInPayload>> {
   const config: AxiosRequestConfig = {
     method: 'GET',
     url: BASE_URL + '/login',
