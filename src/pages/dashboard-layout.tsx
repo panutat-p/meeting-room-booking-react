@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import {
   IconButton,
   Avatar,
@@ -22,9 +23,13 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  useToast,
 } from '@chakra-ui/react';
 import { FiHome, FiTrendingUp, FiMenu, FiBell, FiChevronDown } from 'react-icons/fi';
 import { IconType } from 'react-icons';
+
+import { LogInErrorPayload } from '../types/login-payload';
+import { logout } from '../services/auth.service';
 
 interface LinkItemProps {
   name: string;
@@ -38,6 +43,7 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function DashboardLayout() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -131,6 +137,34 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 function MobileNav({ onOpen, ...rest }: MobileProps) {
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  async function onLogOut() {
+    try {
+      logout();
+      toast({
+        title: 'Logged out',
+        description: 'Token deleted',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      logout();
+      navigate('/login');
+    } catch (e: any | AxiosError<LogInErrorPayload>) {
+      toast({
+        title: 'Failed',
+        description: JSON.stringify(e),
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
+  }
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -177,7 +211,7 @@ function MobileNav({ onOpen, ...rest }: MobileProps) {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={onLogOut}>Log out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
