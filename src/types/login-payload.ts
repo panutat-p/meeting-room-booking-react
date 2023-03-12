@@ -1,7 +1,7 @@
 export type LogInPayload = {
-  accessToken: string;
-  tokenType: string;
-  expiresIn: number;
+  access_token: string;
+  token_type: string;
+  expires_in: number;
 };
 
 export type LogInErrorPayload = {
