@@ -16,6 +16,10 @@ https://redux-toolkit.js.org/tutorials/quick-start
 
 https://github.com/axios/axios
 
+https://github.com/jquense/react-big-calendar
+
+https://date-fns.org/docs/Getting-Started#installation
+
 ```shell
 npm i  -D prettier
 npm i react-router-dom
@@ -26,6 +30,7 @@ npm i @hookform/resolvers
 npm i yup
 npm i  @reduxjs/toolkit react-redux
 npm i axios
+npm i react-big-calendar @types/react-big-calendar date-fns
 ```
 
 ## Template
