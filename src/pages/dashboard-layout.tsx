@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import {
   IconButton,
@@ -30,6 +30,7 @@ import { IconType } from 'react-icons';
 
 import { LogInErrorPayload } from '../types/login-payload';
 import { logout } from '../services/auth.service';
+import { ProfilePayload } from '../types/profie.type';
 
 interface LinkItemProps {
   name: string;
@@ -165,6 +166,8 @@ function MobileNav({ onOpen, ...rest }: MobileProps) {
     }
   }
 
+  const user = useLoaderData() as ProfilePayload['data']['user']; // use data from loader function from route
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -196,9 +199,11 @@ function MobileNav({ onOpen, ...rest }: MobileProps) {
                   }
                 />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">
+                    {user.name} {user.id}
+                  </Text>
                   <Text fontSize="xs" color="gray.600">
-                    Admin
+                    {user.role}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -208,7 +213,7 @@ function MobileNav({ onOpen, ...rest }: MobileProps) {
             </MenuButton>
             <MenuList bg={useColorModeValue('white', 'gray.900')} borderColor={useColorModeValue('gray.200', 'gray.700')}>
               <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
+              {user.role === 'admin' && <MenuItem>Settings</MenuItem>}
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
               <MenuItem onClick={onLogOut}>Log out</MenuItem>
