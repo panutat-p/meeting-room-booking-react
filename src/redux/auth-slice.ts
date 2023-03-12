@@ -23,10 +23,10 @@ export const loginThunk = createAsyncThunk<LogInPayload, LogInFormInput, { rejec
     try {
       const res = await login(user.email, user.password);
       console.log('🟩 Succeeded to login');
+      localStorage.setItem('token', res.data.access_token);
       return res.data;
     } catch (e: any | AxiosError<LogInErrorPayload>) {
-      console.log('🟥 Failed to login, e:', e);
-      console.log('🟥 Failed to login, error:', e.error);
+      console.log('🟥 Failed to login, error:', e.message);
       if (!e.response) {
         console.log('🟥 Unexpected error, e:', e);
         throw e;

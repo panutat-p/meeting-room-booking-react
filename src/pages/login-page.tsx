@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -20,13 +22,11 @@ import {
 import { LogInFormInput } from '../types/form';
 import { useAppDispatch } from '../redux/hooks';
 import { loginThunk } from '../redux/auth-slice';
-import { AxiosError } from 'axios';
 import { LogInErrorPayload } from '../types/login-payload';
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function LogInPage() {
   const toast = useToast();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const schema = yup.object().shape({
@@ -51,6 +51,7 @@ function LogInPage() {
         isClosable: true,
         position: 'top-right',
       });
+      navigate('/');
     } catch (e: any | AxiosError<LogInErrorPayload>) {
       toast({
         title: 'Form is submitted',
