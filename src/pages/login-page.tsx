@@ -22,7 +22,7 @@ import {
 import { LogInFormInput } from '../types/form';
 import { useAppDispatch } from '../redux/hooks';
 import { loginThunk } from '../redux/auth-slice';
-import { LogInErrorPayload } from '../types/login-payload';
+import { LogInErrorPayload } from '../types/login.type';
 
 function LogInPage() {
   const toast = useToast();

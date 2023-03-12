@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { login } from '../services/auth.service';
 import { LogInFormInput } from '../types/form';
-import { LogInErrorPayload, LogInPayload } from '../types/login-payload';
+import { LogInErrorPayload, LoginType } from '../types/login.type';
 import { AxiosError } from 'axios';
 
 export interface AuthState {
   profile: string;
   email: string;
-  logInPayload: LogInPayload | null;
+  logInPayload: LoginType | null;
 }
 
 const initialState: AuthState = {
@@ -17,7 +17,7 @@ const initialState: AuthState = {
   logInPayload: null,
 };
 
-export const loginThunk = createAsyncThunk<LogInPayload, LogInFormInput, { rejectValue: LogInErrorPayload }>(
+export const loginThunk = createAsyncThunk<LoginType, LogInFormInput, { rejectValue: LogInErrorPayload }>(
   'auth/loginThunkStatus',
   async (user: LogInFormInput, { rejectWithValue }) => {
     try {
@@ -45,7 +45,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginThunk.fulfilled, (state, action: PayloadAction<LogInPayload | null>) => {
+    builder.addCase(loginThunk.fulfilled, (state, action: PayloadAction<LoginType | null>) => {
       state.logInPayload = action.payload;
     });
   },

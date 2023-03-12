@@ -28,7 +28,7 @@ import {
 import { FiHome, FiTrendingUp, FiMenu, FiBell, FiChevronDown } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 
-import { LogInErrorPayload } from '../types/login-payload';
+import { LogInErrorPayload } from '../types/login.type';
 import { logout } from '../services/auth.service';
 import { ProfilePayload } from '../types/profie.type';
 

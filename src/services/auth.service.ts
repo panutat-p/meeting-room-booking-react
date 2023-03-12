@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 
-import { LogInPayload } from '../types/login-payload';
+import { LoginType } from '../types/login.type';
 import { BASE_URL } from './url';
 
-export async function login(email: string, password: string): Promise<AxiosResponse<LogInPayload>> {
+export async function login(email: string, password: string): Promise<AxiosResponse<LoginType>> {
   const config: AxiosRequestConfig = {
     method: 'POST',
     url: BASE_URL + '/login',
