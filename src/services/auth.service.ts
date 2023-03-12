@@ -16,8 +16,7 @@ export async function login(email: string, password: string): Promise<AxiosRespo
       password: password,
     },
   };
-  const res = await axios(config);
-  return res.data;
+  return axios(config);
 }
 
 export function logout(): void {
